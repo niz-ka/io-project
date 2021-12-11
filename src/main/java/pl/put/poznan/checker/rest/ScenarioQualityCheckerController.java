@@ -1,45 +1,22 @@
 package pl.put.poznan.checker.rest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-import pl.put.poznan.checker.logic.ScenarioQualityChecker;
-
-import java.util.Arrays;
-
+import pl.put.poznan.checker.logic.Scenario;
 
 @RestController
-@RequestMapping("/{text}")
+@RequestMapping("api/scenario")
 public class ScenarioQualityCheckerController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ScenarioQualityCheckerController.class);
-
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public String get(@PathVariable String text,
-                              @RequestParam(value="transforms", defaultValue="upper,escape") String[] transforms) {
-
-        // log the parameters
-        logger.debug(text);
-        logger.debug(Arrays.toString(transforms));
-
-        // perform the transformation, you should run your logic here, below is just a silly example
-        ScenarioQualityChecker transformer = new ScenarioQualityChecker(transforms);
-        return transformer.transform(text);
+    // GET /api/scenario - show example
+    @GetMapping
+    public Scenario get() {
+        return Scenario.generateExample();
     }
 
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public String post(@PathVariable String text,
-                      @RequestBody String[] transforms) {
-
-        // log the parameters
-        logger.debug(text);
-        logger.debug(Arrays.toString(transforms));
-
-        // perform the transformation, you should run your logic here, below is just a silly example
-        ScenarioQualityChecker transformer = new ScenarioQualityChecker(transforms);
-        return transformer.transform(text);
+    // POST /api/scenario - read from request body and return
+    @PostMapping
+    public Scenario post(@RequestBody Scenario scenario) {
+        return scenario;
     }
-
-
 
 }
 
