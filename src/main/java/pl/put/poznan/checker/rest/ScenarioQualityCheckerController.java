@@ -1,8 +1,6 @@
 package pl.put.poznan.checker.rest;
 import org.springframework.web.bind.annotation.*;
-import pl.put.poznan.checker.logic.KeywordsCountDTO;
-import pl.put.poznan.checker.logic.KeywordCounter;
-import pl.put.poznan.checker.logic.Scenario;
+import pl.put.poznan.checker.logic.*;
 
 @RestController
 @RequestMapping("api/scenario")
@@ -25,6 +23,13 @@ public class ScenarioQualityCheckerController {
     public KeywordsCountDTO countKeywords(@RequestBody Scenario scenario) {
         KeywordCounter counter = new KeywordCounter();
         return counter.countKeywords(scenario);
+    }
+
+    // POST /api/scenario/steps - count steps
+    @PostMapping("/steps")
+    public StepCountDTO countSteps(@RequestBody Scenario scenario) {
+        StepCounter counter = new StepCounter();
+        return counter.countSteps(scenario);
     }
 
 }
