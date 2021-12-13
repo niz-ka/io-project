@@ -31,4 +31,6 @@ jobs:
       uses: actions/upload-artifact@v2
       with: 
         name: assets-for-download
-        path: target/*.jar
+        path: |
+          target/*.jar
+          target/site
