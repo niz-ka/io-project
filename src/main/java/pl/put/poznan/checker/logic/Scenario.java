@@ -1,11 +1,36 @@
 package pl.put.poznan.checker.logic;
 
+/**
+ * Class for storing scenario
+ */
 public class Scenario {
+    /**
+     * Scenario title
+     */
     private String title;
+
+    /**
+     * Scenario actors
+     */
     private String[] actors;
+
+    /**
+     * Scenario system actors
+     */
     private String[] systemActors;
+
+    /**
+     * Scenario steps
+     */
     private ScenarioStep[] steps;
 
+    /**
+     * Initialize a new <code>Scenario</code> object
+     * @param title scenario title
+     * @param actors scenario actors
+     * @param systemActors scenario system actors
+     * @param steps scenario steps
+     */
     public Scenario(String title, String[] actors, String[] systemActors, ScenarioStep[] steps) {
         this.title = title;
         this.actors = actors;
@@ -45,18 +70,4 @@ public class Scenario {
         this.steps = steps;
     }
 
-    public static Scenario generateExample() {
-        return new Scenario(
-                "Dodanie książki",
-                new String[]{"Bibliotekarz"},
-                new String[]{"System"},
-                new ScenarioStep[]{
-                        new ScenarioStep("Wyświetla się fomularz", null),
-                        new ScenarioStep("IF: Bibliotekarz pragnie dodać egzemplarz książki", new ScenarioStep[]{
-                                new ScenarioStep("Bibliotekarz wybiera opcję definiowania egzemplarzy", null),
-                                new ScenarioStep("System prezentuje zdefiniowane egzemplarze", null)
-                        })
-                }
-        );
-    }
 }

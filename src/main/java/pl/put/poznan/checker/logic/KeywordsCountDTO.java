@@ -11,7 +11,7 @@ public class KeywordsCountDTO {
 
     /**
      * Default constructor to set keywords value.
-     * @param k Number of keywords.
+     * @param k number of keywords.
      */
     public KeywordsCountDTO(Integer k) {
         this.keywords = k;

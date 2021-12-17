@@ -2,30 +2,39 @@ package pl.put.poznan.checker.rest;
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.checker.logic.*;
 
+/**
+ * Rest Controller of application
+ */
 @RestController
 @RequestMapping("api/scenario")
 public class ScenarioQualityCheckerController {
 
-    // GET /api/scenario - show example
-    @GetMapping
-    public Scenario get() {
-        return Scenario.generateExample();
-    }
-
-    // POST /api/scenario - read from request body and return
+    /**
+     * Read scenario and return it as response
+     * @param scenario scenario passed in request body
+     * @return scenario passed in request body
+     */
     @PostMapping
-    public Scenario post(@RequestBody Scenario scenario) {
+    public Scenario returnScenario(@RequestBody Scenario scenario) {
         return scenario;
     }
 
-    // POST /api/scenario/keywords - count keywords
+    /**
+     * Count keywords in scenario
+     * @param scenario scenario passed in request body
+     * @return number of keywords
+     */
     @PostMapping("/keywords")
     public KeywordsCountDTO countKeywords(@RequestBody Scenario scenario) {
         KeywordCounter counter = new KeywordCounter();
         return counter.countKeywords(scenario);
     }
 
-    // POST /api/scenario/steps - count steps
+    /**
+     * Count number of steps in scenario
+     * @param scenario scenario passed in request body
+     * @return total number of steps
+     */
     @PostMapping("/steps")
     public StepCountDTO countSteps(@RequestBody Scenario scenario) {
         StepCounter counter = new StepCounter();
