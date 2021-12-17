@@ -17,8 +17,8 @@ public class KeywordCounter {
 
     /**
      * Main method to count keywords in steps of passed scenario.
-     * @param scenario Scenario to count keywords
-     * @return
+     * @param scenario scenario to count keywords
+     * @return number of keywords in passed scenario
      */
     public KeywordsCountDTO countKeywords(Scenario scenario) {
         return new KeywordsCountDTO(this.countKeywordsInStepsArray(scenario.getSteps()));
@@ -26,8 +26,8 @@ public class KeywordCounter {
 
     /**
      * Utility method, checks whether step contains keyword. This method does not check children steps.
-     * @param s Scenario step
-     * @return True if step contains step, false otherwise.
+     * @param s scenario step
+     * @return true if step contains step, false otherwise.
      */
     protected Boolean keywordInStep(ScenarioStep s) {
         for (String keyword : keywords) {
@@ -41,8 +41,8 @@ public class KeywordCounter {
     /**
      * Recursive method checking for keyword in array of steps, and their respective children steps.
      * @see ScenarioStep
-     * @param steps Array of ScenarioStep
-     * @return Number of keywords in array of steps.
+     * @param steps array of ScenarioStep
+     * @return number of keywords in array of steps.
      */
     public Integer countKeywordsInStepsArray(ScenarioStep[] steps) {
         Integer keywords = 0;

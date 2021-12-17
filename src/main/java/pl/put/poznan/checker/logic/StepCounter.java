@@ -6,8 +6,8 @@ package pl.put.poznan.checker.logic;
 public class StepCounter {
     /**
      * Main method to count steps in passed scenario.
-     * @param scenario Scenario to count steps
-     * @return Number of steps in scenario.
+     * @param scenario scenario to count steps
+     * @return number of steps in scenario.
      */
     public StepCountDTO countSteps(Scenario scenario) {
         Integer numberOfSteps = 0;
@@ -20,8 +20,8 @@ public class StepCounter {
     /**
      * Recursive method for checking number of steps .
      * @see ScenarioStep
-     * @param steps Array of steps.
-     * @return Number of steps (including substeps) within steps array.
+     * @param steps array of steps.
+     * @return number of steps (including substeps) within steps array.
      */
     public Integer countStepsWithSubsteps(ScenarioStep[] steps) {
         Integer numberOfSteps = 0;

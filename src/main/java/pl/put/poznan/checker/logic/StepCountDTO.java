@@ -10,7 +10,7 @@ public class StepCountDTO {
 
     /**
      * Default constructor to set steps value.
-     * @param s Number of steps.
+     * @param s number of steps.
      */
     public StepCountDTO(Integer s) { this.steps = s; }
 }
