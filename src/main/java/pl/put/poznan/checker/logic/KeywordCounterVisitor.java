@@ -20,8 +20,6 @@ public class KeywordCounterVisitor implements Visitor {
      * @param scenario scenario to count keywords
      * @return number of keywords in passed scenario
      */
-
-
     public DTO visit(Scenario scenario) {
         return new KeywordsCountDTO(this.countKeywordsInStepsArray(scenario.getSteps()));
     }

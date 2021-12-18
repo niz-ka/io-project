@@ -9,8 +9,6 @@ public class StepCounterVisitor implements Visitor{
      * @param scenario scenario to count steps
      * @return number of steps in scenario.
      */
-
-
     public DTO visit(Scenario scenario) {
         Integer numberOfSteps = 0;
         if (scenario.getSteps() != null) {
