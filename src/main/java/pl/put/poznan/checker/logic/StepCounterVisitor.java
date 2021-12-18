@@ -11,21 +11,14 @@ public class StepCounterVisitor implements Visitor{
      */
 
 
-    public Integer visit(Scenario scenario) {
-        Integer numberOfSteps = 0;
-        if (scenario.getSteps() != null) {
-            numberOfSteps = this.countStepsWithSubsteps(scenario.getSteps());
-        }
-        return numberOfSteps;
-    }
-
-    /*public StepCountDTO countSteps(Scenario scenario) {
+    public DTO visit(Scenario scenario) {
         Integer numberOfSteps = 0;
         if (scenario.getSteps() != null) {
             numberOfSteps = this.countStepsWithSubsteps(scenario.getSteps());
         }
         return new StepCountDTO(numberOfSteps);
-    }*/
+    }
+
 
     /**
      * Recursive method for checking number of steps .

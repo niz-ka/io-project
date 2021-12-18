@@ -38,7 +38,7 @@ public class Scenario {
         this.steps = steps;
     }
 
-    public Integer accept(Visitor visitor) {
+    public DTO accept(Visitor visitor) {
         return visitor.visit(this);
     }
 

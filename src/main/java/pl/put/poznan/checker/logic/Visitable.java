@@ -10,6 +10,6 @@ public interface Visitable {
     // the visitor object. The right version of visit()
     // is called because of method overloading
 
-    public Integer accept(Visitor visitor);
+    public DTO accept(Visitor visitor);
 
 }

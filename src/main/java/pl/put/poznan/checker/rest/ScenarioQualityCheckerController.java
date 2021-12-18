@@ -25,10 +25,9 @@ public class ScenarioQualityCheckerController {
      * @return number of keywords
      */
     @PostMapping("/keywords")
-    public KeywordsCountDTO countKeywords(@RequestBody Scenario scenario) {
+    public DTO countKeywords(@RequestBody Scenario scenario) {
         KeywordCounterVisitor counter = new KeywordCounterVisitor();
-        Integer keywords = scenario.accept(counter);   //counter.countKeywords(scenario);
-        return new KeywordsCountDTO(keywords);
+        return scenario.accept(counter);
     }
 
     /**
@@ -37,10 +36,9 @@ public class ScenarioQualityCheckerController {
      * @return total number of steps
      */
     @PostMapping("/steps")
-    public StepCountDTO countSteps(@RequestBody Scenario scenario) {
+    public DTO countSteps(@RequestBody Scenario scenario) {
         StepCounterVisitor counter = new StepCounterVisitor();
-        Integer steps = scenario.accept(counter);
-        return new StepCountDTO(steps);
+        return scenario.accept(counter);
     }
 
 }

@@ -22,15 +22,9 @@ public class KeywordCounterVisitor implements Visitor {
      */
 
 
-    public Integer visit(Scenario scenario) {
-        return countKeywordsInStepsArray(scenario.getSteps());
+    public DTO visit(Scenario scenario) {
+        return new KeywordsCountDTO(this.countKeywordsInStepsArray(scenario.getSteps()));
     }
-
-
-
-    //public KeywordsCountDTO countKeywords(Scenario scenario) {
-    //    return new KeywordsCountDTO(this.countKeywordsInStepsArray(scenario.getSteps()));
-    //}
 
     /**
      * Utility method, checks whether step contains keyword. This method does not check children steps.
