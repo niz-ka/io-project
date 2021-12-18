@@ -3,19 +3,29 @@ package pl.put.poznan.checker.logic;
 /**
  * Class for counting steps in scenario.
  */
-public class StepCounter {
+public class StepCounterVisitor implements Visitor{
     /**
      * Main method to count steps in passed scenario.
      * @param scenario scenario to count steps
      * @return number of steps in scenario.
      */
-    public StepCountDTO countSteps(Scenario scenario) {
+
+
+    public Integer visit(Scenario scenario) {
+        Integer numberOfSteps = 0;
+        if (scenario.getSteps() != null) {
+            numberOfSteps = this.countStepsWithSubsteps(scenario.getSteps());
+        }
+        return numberOfSteps;
+    }
+
+    /*public StepCountDTO countSteps(Scenario scenario) {
         Integer numberOfSteps = 0;
         if (scenario.getSteps() != null) {
             numberOfSteps = this.countStepsWithSubsteps(scenario.getSteps());
         }
         return new StepCountDTO(numberOfSteps);
-    }
+    }*/
 
     /**
      * Recursive method for checking number of steps .

@@ -38,6 +38,13 @@ public class Scenario {
         this.steps = steps;
     }
 
+    public Integer accept(Visitor visitor) {
+        return visitor.visit(this);
+    }
+
+
+
+
     public String getTitle() {
         return title;
     }

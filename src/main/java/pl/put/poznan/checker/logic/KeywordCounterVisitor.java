@@ -3,7 +3,7 @@ package pl.put.poznan.checker.logic;
 /**
  * Class for counting keywords in scenario steps.
  */
-public class KeywordCounter {
+public class KeywordCounterVisitor implements Visitor {
     /**
      * Scenario keywords, always uppercase and at the beginning of step.
      */
@@ -20,9 +20,17 @@ public class KeywordCounter {
      * @param scenario scenario to count keywords
      * @return number of keywords in passed scenario
      */
-    public KeywordsCountDTO countKeywords(Scenario scenario) {
-        return new KeywordsCountDTO(this.countKeywordsInStepsArray(scenario.getSteps()));
+
+
+    public Integer visit(Scenario scenario) {
+        return countKeywordsInStepsArray(scenario.getSteps());
     }
+
+
+
+    //public KeywordsCountDTO countKeywords(Scenario scenario) {
+    //    return new KeywordsCountDTO(this.countKeywordsInStepsArray(scenario.getSteps()));
+    //}
 
     /**
      * Utility method, checks whether step contains keyword. This method does not check children steps.

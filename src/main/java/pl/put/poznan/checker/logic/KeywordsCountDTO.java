@@ -3,7 +3,7 @@ package pl.put.poznan.checker.logic;
 /**
  * Keyword counter data transfer object.
  */
-public class KeywordsCountDTO {
+public class KeywordsCountDTO implements DTO{
     /**
      * Number of keywords.
      */

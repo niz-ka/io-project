@@ -2,7 +2,7 @@ package pl.put.poznan.checker.logic;
 /**
  * Step counter data transfer object.
  */
-public class StepCountDTO {
+public class StepCountDTO implements DTO{
     /**
      * Number of steps.
      */
