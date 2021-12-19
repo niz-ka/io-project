@@ -1,4 +1,9 @@
-package pl.put.poznan.checker.logic;
+package pl.put.poznan.checker.logic.visitor;
+
+import pl.put.poznan.checker.logic.visitable.Scenario;
+import pl.put.poznan.checker.logic.visitable.ScenarioStep;
+import pl.put.poznan.checker.logic.dto.DTO;
+import pl.put.poznan.checker.logic.dto.StepCountDTO;
 
 /**
  * Class for counting steps in scenario.

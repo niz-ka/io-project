@@ -1,4 +1,7 @@
-package pl.put.poznan.checker.logic;
+package pl.put.poznan.checker.logic.visitable;
+
+import pl.put.poznan.checker.logic.dto.DTO;
+import pl.put.poznan.checker.logic.visitor.Visitor;
 
 /**
  * Class for storing scenario

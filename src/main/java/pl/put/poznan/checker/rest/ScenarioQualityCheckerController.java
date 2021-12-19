@@ -1,6 +1,9 @@
 package pl.put.poznan.checker.rest;
 import org.springframework.web.bind.annotation.*;
-import pl.put.poznan.checker.logic.*;
+import pl.put.poznan.checker.logic.dto.DTO;
+import pl.put.poznan.checker.logic.visitable.Scenario;
+import pl.put.poznan.checker.logic.visitor.KeywordCounterVisitor;
+import pl.put.poznan.checker.logic.visitor.StepCounterVisitor;
 
 /**
  * Rest Controller of application
