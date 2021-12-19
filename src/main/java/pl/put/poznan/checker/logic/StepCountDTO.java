@@ -6,7 +6,7 @@ public class StepCountDTO implements DTO{
     /**
      * Number of steps.
      */
-    public Integer steps = 0;
+    public Integer steps;
 
     /**
      * Default constructor to set steps value.

@@ -3,7 +3,7 @@ package pl.put.poznan.checker.logic;
 /**
  * Class for storing scenario
  */
-public class Scenario {
+public class Scenario implements Visitable {
     /**
      * Scenario title
      */
@@ -38,12 +38,10 @@ public class Scenario {
         this.steps = steps;
     }
 
+    @Override
     public DTO accept(Visitor visitor) {
         return visitor.visit(this);
     }
-
-
-
 
     public String getTitle() {
         return title;

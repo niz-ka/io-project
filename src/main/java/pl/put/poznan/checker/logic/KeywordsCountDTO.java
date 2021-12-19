@@ -7,7 +7,7 @@ public class KeywordsCountDTO implements DTO{
     /**
      * Number of keywords.
      */
-    public Integer keywords = 0;
+    public Integer keywords;
 
     /**
      * Default constructor to set keywords value.
