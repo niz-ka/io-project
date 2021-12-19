@@ -1,4 +1,4 @@
-package pl.put.poznan.checker.logic;
+package pl.put.poznan.checker.logic.visitable;
 
 /**
  * Class for storing scenario step and it's children steps

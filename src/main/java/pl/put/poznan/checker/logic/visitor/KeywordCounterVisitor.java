@@ -1,9 +1,14 @@
-package pl.put.poznan.checker.logic;
+package pl.put.poznan.checker.logic.visitor;
+
+import pl.put.poznan.checker.logic.visitable.Scenario;
+import pl.put.poznan.checker.logic.visitable.ScenarioStep;
+import pl.put.poznan.checker.logic.dto.DTO;
+import pl.put.poznan.checker.logic.dto.KeywordsCountDTO;
 
 /**
  * Class for counting keywords in scenario steps.
  */
-public class KeywordCounter {
+public class KeywordCounterVisitor implements Visitor {
     /**
      * Scenario keywords, always uppercase and at the beginning of step.
      */
@@ -20,7 +25,8 @@ public class KeywordCounter {
      * @param scenario scenario to count keywords
      * @return number of keywords in passed scenario
      */
-    public KeywordsCountDTO countKeywords(Scenario scenario) {
+    @Override
+    public DTO visit(Scenario scenario) {
         return new KeywordsCountDTO(this.countKeywordsInStepsArray(scenario.getSteps()));
     }
 

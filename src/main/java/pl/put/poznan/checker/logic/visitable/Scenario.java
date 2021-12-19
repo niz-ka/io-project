@@ -1,9 +1,12 @@
-package pl.put.poznan.checker.logic;
+package pl.put.poznan.checker.logic.visitable;
+
+import pl.put.poznan.checker.logic.dto.DTO;
+import pl.put.poznan.checker.logic.visitor.Visitor;
 
 /**
  * Class for storing scenario
  */
-public class Scenario {
+public class Scenario implements Visitable {
     /**
      * Scenario title
      */
@@ -36,6 +39,11 @@ public class Scenario {
         this.actors = actors;
         this.systemActors = systemActors;
         this.steps = steps;
+    }
+
+    @Override
+    public DTO accept(Visitor visitor) {
+        return visitor.visit(this);
     }
 
     public String getTitle() {

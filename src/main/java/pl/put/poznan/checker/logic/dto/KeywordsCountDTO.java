@@ -1,13 +1,15 @@
-package pl.put.poznan.checker.logic;
+package pl.put.poznan.checker.logic.dto;
+
+import pl.put.poznan.checker.logic.dto.DTO;
 
 /**
  * Keyword counter data transfer object.
  */
-public class KeywordsCountDTO {
+public class KeywordsCountDTO implements DTO {
     /**
      * Number of keywords.
      */
-    public Integer keywords = 0;
+    public Integer keywords;
 
     /**
      * Default constructor to set keywords value.
