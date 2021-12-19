@@ -12,7 +12,7 @@ public class KeywordCounterVisitor implements Visitor {
     /**
      * Scenario keywords, always uppercase and at the beginning of step.
      */
-    protected String[] keywords = {
+    public static String[] keywords = {
             "IF",
             "FOR EACH",
             "ELSE",

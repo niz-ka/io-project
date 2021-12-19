@@ -2,6 +2,7 @@ package pl.put.poznan.checker.rest;
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.checker.logic.dto.DTO;
 import pl.put.poznan.checker.logic.visitable.Scenario;
+import pl.put.poznan.checker.logic.visitor.InvalidActorStepVisitor;
 import pl.put.poznan.checker.logic.visitor.KeywordCounterVisitor;
 import pl.put.poznan.checker.logic.visitor.StepCounterVisitor;
 
@@ -44,6 +45,17 @@ public class ScenarioQualityCheckerController {
         return scenario.accept(counter);
     }
 
+
+    /**
+     * Get invalid steps without actor at the beginning
+     * @param scenario scenario passed in request body
+     * @return array of steps
+     */
+    @PostMapping("/actors")
+    public DTO invalidSteps(@RequestBody Scenario scenario) {
+        InvalidActorStepVisitor checker = new InvalidActorStepVisitor();
+        return scenario.accept(checker);
+    }
 }
 
 
