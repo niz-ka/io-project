@@ -60,7 +60,7 @@ public class InvalidActorStepVisitor implements Visitor {
      * @param stepContent Name of step
      * @return true if step includes actor at the beginning, false otherwise
      */
-    protected Boolean isStepValid(String stepContent) {
+    protected boolean isStepValid(String stepContent) {
         for (String actor : this.actors) {
            if (stepContent.startsWith(actor)) {
                logger.debug("\tStep: {}, is valid", stepContent);

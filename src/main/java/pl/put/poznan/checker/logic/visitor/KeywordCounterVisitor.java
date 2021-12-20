@@ -46,7 +46,7 @@ public class KeywordCounterVisitor implements Visitor {
      * @param s scenario step
      * @return true if step contains step, false otherwise.
      */
-    protected Boolean keywordInStep(ScenarioStep s) {
+    protected boolean keywordInStep(ScenarioStep s) {
         for (String keyword : keywords) {
             if (s.getName().startsWith(keyword)) {
                 logger.debug("\t\tStep {} starts with {}", s.getName(), keyword);
