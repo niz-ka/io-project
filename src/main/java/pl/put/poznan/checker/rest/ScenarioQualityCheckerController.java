@@ -1,7 +1,9 @@
 package pl.put.poznan.checker.rest;
 
 import org.springframework.web.bind.annotation.*;
-import pl.put.poznan.checker.logic.dto.DTO;
+import pl.put.poznan.checker.logic.dto.InvalidStepsDTO;
+import pl.put.poznan.checker.logic.dto.KeywordsCountDTO;
+import pl.put.poznan.checker.logic.dto.StepCountDTO;
 import pl.put.poznan.checker.logic.visitable.Scenario;
 import pl.put.poznan.checker.logic.visitor.InvalidActorStepVisitor;
 import pl.put.poznan.checker.logic.visitor.KeywordCounterVisitor;
@@ -30,9 +32,10 @@ public class ScenarioQualityCheckerController {
      * @return number of keywords
      */
     @PostMapping("/keywords")
-    public DTO countKeywords(@RequestBody Scenario scenario) {
+    public KeywordsCountDTO countKeywords(@RequestBody Scenario scenario) {
         KeywordCounterVisitor counter = new KeywordCounterVisitor();
-        return scenario.accept(counter);
+        scenario.accept(counter);
+        return new KeywordsCountDTO(counter.getNumberOfKeywords());
     }
 
     /**
@@ -41,9 +44,10 @@ public class ScenarioQualityCheckerController {
      * @return total number of steps
      */
     @PostMapping("/steps")
-    public DTO countSteps(@RequestBody Scenario scenario) {
+    public StepCountDTO countSteps(@RequestBody Scenario scenario) {
         StepCounterVisitor counter = new StepCounterVisitor();
-        return scenario.accept(counter);
+        scenario.accept(counter);
+        return new StepCountDTO(counter.getNumberOfSteps());
     }
 
 
@@ -53,9 +57,10 @@ public class ScenarioQualityCheckerController {
      * @return array of steps
      */
     @PostMapping("/actors")
-    public DTO invalidSteps(@RequestBody Scenario scenario) {
+    public InvalidStepsDTO invalidSteps(@RequestBody Scenario scenario) {
         InvalidActorStepVisitor checker = new InvalidActorStepVisitor();
-        return scenario.accept(checker);
+        scenario.accept(checker);
+        return new InvalidStepsDTO(checker.getInvalidSteps());
     }
 }
 
