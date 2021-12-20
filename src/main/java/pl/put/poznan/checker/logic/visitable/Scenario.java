@@ -1,6 +1,5 @@
 package pl.put.poznan.checker.logic.visitable;
 
-import pl.put.poznan.checker.logic.dto.DTO;
 import pl.put.poznan.checker.logic.visitor.Visitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,9 +48,13 @@ public class Scenario implements Visitable {
         logger.info("New scenario initialized");
     }
 
+    /**
+     * Accept a visitor instance
+     * @param visitor instance of visitor
+     */
     @Override
-    public DTO accept(Visitor visitor) {
-        return visitor.visit(this);
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     public String[] getActors() {

@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Keyword counter data transfer object.
  */
-public class KeywordsCountDTO implements DTO {
+public class KeywordsCountDTO {
     /**
      * Class logger
      */
@@ -15,13 +15,13 @@ public class KeywordsCountDTO implements DTO {
     /**
      * Number of keywords.
      */
-    public Integer keywords;
+    public int keywords;
 
     /**
      * Default constructor to set keywords value.
      * @param k number of keywords.
      */
-    public KeywordsCountDTO(Integer k) {
+    public KeywordsCountDTO(int k) {
         this.keywords = k;
         logger.info("\tConverted number of keywords to DTO");
     }

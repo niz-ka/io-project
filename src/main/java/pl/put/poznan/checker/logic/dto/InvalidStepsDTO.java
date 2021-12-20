@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Invalid steps data transfer object.
  */
-public class InvalidStepsDTO implements DTO {
+public class InvalidStepsDTO {
     /**
      * Class logger
      */

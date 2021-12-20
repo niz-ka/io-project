@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Step counter data transfer object.
  */
-public class StepCountDTO implements DTO {
+public class StepCountDTO {
     /**
      * Class logger
      */
@@ -15,13 +15,13 @@ public class StepCountDTO implements DTO {
     /**
      * Number of steps.
      */
-    public Integer steps;
+    public int steps;
 
     /**
      * Default constructor to set steps value.
      * @param s number of steps.
      */
-    public StepCountDTO(Integer s) {
+    public StepCountDTO(int s) {
         this.steps = s;
         logger.info("\tConverted number of steps to DTO");
     }

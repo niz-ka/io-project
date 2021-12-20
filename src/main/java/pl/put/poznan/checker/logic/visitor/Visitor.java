@@ -1,8 +1,14 @@
 package pl.put.poznan.checker.logic.visitor;
 
 import pl.put.poznan.checker.logic.visitable.Scenario;
-import pl.put.poznan.checker.logic.dto.DTO;
 
+/**
+ * Part of visitor pattern
+ */
 public interface Visitor {
-    DTO visit(Scenario scenario);
+    /**
+     * Visit scenario instance
+     * @param scenario instance of scenario
+     */
+    void visit(Scenario scenario);
 }

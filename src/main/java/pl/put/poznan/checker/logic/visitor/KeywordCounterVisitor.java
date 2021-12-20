@@ -2,8 +2,6 @@ package pl.put.poznan.checker.logic.visitor;
 
 import pl.put.poznan.checker.logic.visitable.Scenario;
 import pl.put.poznan.checker.logic.visitable.ScenarioStep;
-import pl.put.poznan.checker.logic.dto.DTO;
-import pl.put.poznan.checker.logic.dto.KeywordsCountDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +14,11 @@ public class KeywordCounterVisitor implements Visitor {
      * Class logger
      */
     static Logger logger = LoggerFactory.getLogger(InvalidActorStepVisitor.class);
+
+    /**
+     * Number of keywords in scenario
+     */
+    private int numberOfKeywords;
 
     /**
      * Scenario keywords, always uppercase and at the beginning of step.
@@ -31,12 +34,11 @@ public class KeywordCounterVisitor implements Visitor {
     /**
      * Main method to count keywords in steps of passed scenario.
      * @param scenario scenario to count keywords
-     * @return number of keywords in passed scenario
      */
     @Override
-    public DTO visit(Scenario scenario) {
+    public void visit(Scenario scenario) {
         logger.info("Counting keywords in scenario");
-        return new KeywordsCountDTO(this.countKeywordsInStepsArray(scenario.getSteps()));
+        this.numberOfKeywords = this.countKeywordsInStepsArray(scenario.getSteps());
     }
 
     /**
@@ -60,17 +62,21 @@ public class KeywordCounterVisitor implements Visitor {
      * @param steps array of ScenarioStep
      * @return number of keywords in array of steps.
      */
-    public Integer countKeywordsInStepsArray(ScenarioStep[] steps) {
-        Integer keywords = 0;
+    public int countKeywordsInStepsArray(ScenarioStep[] steps) {
+        int counter = 0;
         if (steps != null) {
             for (ScenarioStep step : steps) {
                 if (this.keywordInStep(step)) {
-                    keywords += 1;
+                    counter += 1;
                 }
-                keywords += this.countKeywordsInStepsArray(step.getChildrenSteps());
+               counter += this.countKeywordsInStepsArray(step.getChildrenSteps());
             }
         }
-        logger.debug("\tNumber of keywords: {}", keywords);
-        return keywords;
+        logger.debug("\tNumber of keywords: {}", counter);
+        return counter;
+    }
+
+    public int getNumberOfKeywords() {
+        return this.numberOfKeywords;
     }
 }

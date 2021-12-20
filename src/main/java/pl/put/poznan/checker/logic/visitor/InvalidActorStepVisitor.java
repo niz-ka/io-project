@@ -1,12 +1,13 @@
 package pl.put.poznan.checker.logic.visitor;
 
-import pl.put.poznan.checker.logic.dto.DTO;
-import pl.put.poznan.checker.logic.dto.InvalidStepsDTO;
-import pl.put.poznan.checker.logic.visitable.Scenario;
-import pl.put.poznan.checker.logic.visitable.ScenarioStep;
-import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.put.poznan.checker.logic.visitable.Scenario;
+import pl.put.poznan.checker.logic.visitable.ScenarioStep;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 /**
  * Class for checking if scenario includes invalid steps
@@ -18,28 +19,27 @@ public class InvalidActorStepVisitor implements Visitor {
     static Logger logger = LoggerFactory.getLogger(InvalidActorStepVisitor.class);
 
     /**
+     * Array containing invalid steps
+     */
+    ArrayList<ScenarioStep> invalidSteps = new ArrayList<>();
+
+    /**
      * Array of actors from scenario, for caching purposes
      */
     protected String[] actors;
 
     /**
-     * Array of system actors from scenario, for caching purposes
-     */
-    protected String[] systemActors;
-
-    /**
      * Main method get array of invalid steps from scenario.
      * @param scenario scenario to check
-     * @return Array of invalid steps
      */
     @Override
-    public DTO visit(Scenario scenario) {
+    public void visit(Scenario scenario) {
         logger.info("Checking scenario steps");
-        this.actors = scenario.getActors();
-        this.systemActors = scenario.getSystemActors();
-        ArrayList<ScenarioStep> steps = this.detectInvalidSteps(scenario.getSteps());
 
-        return new InvalidStepsDTO(steps);
+        if(scenario.getSteps() != null && scenario.getActors() != null && scenario.getSystemActors() != null) {
+            this.actors = Stream.concat(Arrays.stream(scenario.getActors()), Arrays.stream(scenario.getSystemActors())).toArray(String[]::new);
+            this.invalidSteps = this.detectInvalidSteps(scenario.getSteps());
+        }
     }
 
     /**
@@ -67,12 +67,6 @@ public class InvalidActorStepVisitor implements Visitor {
                return true;
            }
         }
-        for (String systemActor : this.systemActors) {
-            if (stepContent.startsWith(systemActor)) {
-                logger.debug("\tStep: {}, is valid", stepContent);
-                return true;
-            }
-        }
         logger.debug("\tStep: {}, is not valid", stepContent);
         return false;
     }
@@ -94,5 +88,9 @@ public class InvalidActorStepVisitor implements Visitor {
         }
         logger.info("\tList of invalid steps found");
         return invalidSteps;
+    }
+
+    public ArrayList<ScenarioStep> getInvalidSteps() {
+        return this.invalidSteps;
     }
 }
