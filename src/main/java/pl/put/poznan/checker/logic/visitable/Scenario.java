@@ -2,11 +2,18 @@ package pl.put.poznan.checker.logic.visitable;
 
 import pl.put.poznan.checker.logic.dto.DTO;
 import pl.put.poznan.checker.logic.visitor.Visitor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class for storing scenario
  */
 public class Scenario implements Visitable {
+    /**
+     * Class logger
+     */
+    static Logger logger = LoggerFactory.getLogger(Scenario.class);
+
     /**
      * Scenario title
      */
@@ -39,11 +46,20 @@ public class Scenario implements Visitable {
         this.actors = actors;
         this.systemActors = systemActors;
         this.steps = steps;
+        logger.info("New scenario initialized");
     }
 
     @Override
     public DTO accept(Visitor visitor) {
         return visitor.visit(this);
+    }
+
+    public String[] getActors() {
+        return actors;
+    }
+
+    public ScenarioStep[] getSteps() {
+        return steps;
     }
 
     public String getTitle() {
@@ -52,14 +68,12 @@ public class Scenario implements Visitable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String[] getActors() {
-        return actors;
+        logger.info("New scenario title set");
     }
 
     public void setActors(String[] actors) {
         this.actors = actors;
+        logger.info("New scenario actors set");
     }
 
     public String[] getSystemActors() {
@@ -68,14 +82,11 @@ public class Scenario implements Visitable {
 
     public void setSystemActors(String[] systemActors) {
         this.systemActors = systemActors;
-    }
-
-    public ScenarioStep[] getSteps() {
-        return steps;
+        logger.info("New scenario system actors set");
     }
 
     public void setSteps(ScenarioStep[] steps) {
         this.steps = steps;
+        logger.info("New scenario steps set");
     }
-
 }

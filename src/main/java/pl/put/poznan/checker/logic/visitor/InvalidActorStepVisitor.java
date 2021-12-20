@@ -4,17 +4,28 @@ import pl.put.poznan.checker.logic.dto.DTO;
 import pl.put.poznan.checker.logic.dto.InvalidStepsDTO;
 import pl.put.poznan.checker.logic.visitable.Scenario;
 import pl.put.poznan.checker.logic.visitable.ScenarioStep;
-
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class for checking if scenario includes invalid steps
  */
 public class InvalidActorStepVisitor implements Visitor {
     /**
+     * Class logger
+     */
+    static Logger logger = LoggerFactory.getLogger(InvalidActorStepVisitor.class);
+
+    /**
      * Array of actors from scenario, for caching purposes
      */
     protected String[] actors;
+
+    /**
+     * Array of system actors from scenario, for caching purposes
+     */
+    protected String[] systemActors;
 
     /**
      * Main method get array of invalid steps from scenario.
@@ -23,7 +34,9 @@ public class InvalidActorStepVisitor implements Visitor {
      */
     @Override
     public DTO visit(Scenario scenario) {
+        logger.info("Checking scenario steps");
         this.actors = scenario.getActors();
+        this.systemActors = scenario.getSystemActors();
         ArrayList<ScenarioStep> steps = this.detectInvalidSteps(scenario.getSteps());
 
         return new InvalidStepsDTO(steps);
@@ -50,9 +63,17 @@ public class InvalidActorStepVisitor implements Visitor {
     protected Boolean isStepValid(String stepContent) {
         for (String actor : this.actors) {
            if (stepContent.startsWith(actor)) {
+               logger.debug("\tStep: {}, is valid", stepContent);
                return true;
            }
         }
+        for (String systemActor : this.systemActors) {
+            if (stepContent.startsWith(systemActor)) {
+                logger.debug("\tStep: {}, is valid", stepContent);
+                return true;
+            }
+        }
+        logger.debug("\tStep: {}, is not valid", stepContent);
         return false;
     }
 
@@ -62,7 +83,6 @@ public class InvalidActorStepVisitor implements Visitor {
      * @return Array of invalid steps.
      */
     protected ArrayList<ScenarioStep> detectInvalidSteps(ScenarioStep[] steps) {
-        String[] keywords = KeywordCounterVisitor.keywords;
         ArrayList<ScenarioStep> invalidSteps = new ArrayList<>();
         for (ScenarioStep step : steps) {
             if (!this.isStepValid(this.removeKeywords(step.getName()))) {
@@ -72,6 +92,7 @@ public class InvalidActorStepVisitor implements Visitor {
                 invalidSteps.addAll(this.detectInvalidSteps(step.getChildrenSteps()));
             }
         }
+        logger.info("\tList of invalid steps found");
         return invalidSteps;
     }
 }

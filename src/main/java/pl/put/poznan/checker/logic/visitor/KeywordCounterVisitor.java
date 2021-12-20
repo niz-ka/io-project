@@ -5,10 +5,18 @@ import pl.put.poznan.checker.logic.visitable.ScenarioStep;
 import pl.put.poznan.checker.logic.dto.DTO;
 import pl.put.poznan.checker.logic.dto.KeywordsCountDTO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Class for counting keywords in scenario steps.
  */
 public class KeywordCounterVisitor implements Visitor {
+    /**
+     * Class logger
+     */
+    static Logger logger = LoggerFactory.getLogger(InvalidActorStepVisitor.class);
+
     /**
      * Scenario keywords, always uppercase and at the beginning of step.
      */
@@ -27,6 +35,7 @@ public class KeywordCounterVisitor implements Visitor {
      */
     @Override
     public DTO visit(Scenario scenario) {
+        logger.info("Counting keywords in scenario");
         return new KeywordsCountDTO(this.countKeywordsInStepsArray(scenario.getSteps()));
     }
 
@@ -38,6 +47,7 @@ public class KeywordCounterVisitor implements Visitor {
     protected Boolean keywordInStep(ScenarioStep s) {
         for (String keyword : keywords) {
             if (s.getName().startsWith(keyword)) {
+                logger.debug("\t\tStep {} starts with {}", s.getName(), keyword);
                 return true;
             }
         }
@@ -60,6 +70,7 @@ public class KeywordCounterVisitor implements Visitor {
                 keywords += this.countKeywordsInStepsArray(step.getChildrenSteps());
             }
         }
+        logger.debug("\tNumber of keywords: {}", keywords);
         return keywords;
     }
 }

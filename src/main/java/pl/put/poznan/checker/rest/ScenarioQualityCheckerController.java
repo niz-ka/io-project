@@ -1,4 +1,5 @@
 package pl.put.poznan.checker.rest;
+
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.checker.logic.dto.DTO;
 import pl.put.poznan.checker.logic.visitable.Scenario;
