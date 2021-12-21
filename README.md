@@ -109,3 +109,14 @@ curl -v -X POST -H 'Content-type: application/json' http://localhost:8080/api/sc
   "numberOfSteps": 0, (integer)
 }
 ```
+
+## Invalid steps
+```json
+{
+  "steps": [
+    {
+      "name": "Wyświetla się fomularz", (string)
+      "childrenSteps": null (array|null)
+    }
+  ]
+}
