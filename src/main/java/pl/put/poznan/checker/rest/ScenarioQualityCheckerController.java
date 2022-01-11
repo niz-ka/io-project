@@ -3,10 +3,12 @@ package pl.put.poznan.checker.rest;
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.checker.logic.dto.InvalidStepsDTO;
 import pl.put.poznan.checker.logic.dto.KeywordsCountDTO;
+import pl.put.poznan.checker.logic.dto.QueryStepsDTO;
 import pl.put.poznan.checker.logic.dto.StepCountDTO;
 import pl.put.poznan.checker.logic.visitable.Scenario;
 import pl.put.poznan.checker.logic.visitor.InvalidActorStepVisitor;
 import pl.put.poznan.checker.logic.visitor.KeywordCounterVisitor;
+import pl.put.poznan.checker.logic.visitor.QueryStepsByActorVisitor;
 import pl.put.poznan.checker.logic.visitor.StepCounterVisitor;
 
 /**
@@ -61,6 +63,19 @@ public class ScenarioQualityCheckerController {
         InvalidActorStepVisitor checker = new InvalidActorStepVisitor();
         scenario.accept(checker);
         return new InvalidStepsDTO(checker.getInvalidSteps());
+    }
+
+    /**
+     * Get steps containing specific actor
+     * @param scenario scenario passed in request body
+     * @param actor Actor to search for
+     * @return array of steps
+     */
+    @PostMapping("/query")
+    public QueryStepsDTO getStepsByActor(@RequestBody Scenario scenario,  @RequestParam(required=false) String actor) {
+        QueryStepsByActorVisitor searcher = new QueryStepsByActorVisitor(actor);
+        scenario.accept(searcher);
+        return new QueryStepsDTO(searcher.getSteps());
     }
 }
 
