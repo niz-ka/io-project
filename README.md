@@ -62,6 +62,23 @@ Get invalid steps without actors at the beginning
 ```bash
 curl -v -X POST -H 'Content-type: application/json' http://localhost:8080/api/scenario/actors -d @scenario.json
 ```
+## Query
+### POST /api/scenario/query?actor={$actor}
+Get steps by specified filter
+#### Parameters
+* <a href="#scenario-model">scenario</a> (required) - scenario passed in request body
+* actor - actor passed in query string
+#### Response
+| Code | Description |
+|:---:| --- |
+| 200 | Returns <a href="#steps-count">steps count</a> message with number of steps in scenario |
+| 405 | Method not allowed |
+| 415 | Content-type header is not application/json |
+
+#### Example
+```bash
+curl -X POST -H 'Content-type: application/json' http://localhost:8080/api/scenario/query?actor=System -d @scenario.json
+```
 
 # Models
 ## Scenario Model
